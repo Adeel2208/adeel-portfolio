@@ -100,7 +100,7 @@ export default function About() {
                 className="w-[270px] h-[270px] sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[470px] lg:h-[470px] xl:w-[550px] xl:h-[550px] rounded-3xl overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl drop-shadow-2xl"
               >
                 <img
-                  src="/images/profile4.png"
+                  src="/image/profile4.png"
                   alt="Adeel Mukhtar — AI/ML Engineer"
                   className="w-full h-full object-contain"
                   loading="lazy"

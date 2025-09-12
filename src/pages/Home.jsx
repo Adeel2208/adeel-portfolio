@@ -15,7 +15,7 @@ import PublicationCard from '../components/PublicationCard';
 import ConferenceCard from '../components/ConferenceCard';
 
 export default function Home() {
-  const images = ['/images/profile.png', '/images/profile2.png'];
+  const images = ['/image/profile.png', '/image/profile2.png'];
   const [currentImage, setCurrentImage] = useState(0);
   const [loadedImages, setLoadedImages] = useState([]);
   const [isImageHovered, setIsImageHovered] = useState(false);

@@ -117,18 +117,18 @@ export default function Contact() {
             viewport={{ once: true, margin: "-80px" }}
             className="relative flex justify-center lg:justify-end mt-32 sm:mt-28 lg:mt-24"
           >
-            <div className="relative">
+            <div className="relative w-full max-w-[24rem] sm:max-w-[28rem] md:max-w-[30rem] lg:max-w-[32rem]">
               {/* Floating Image */}
               <motion.div
                 whileHover={{ scale: 1.05, rotate: [0, 2, -2, 0] }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 350, damping: 15 }}
-                className="w-72 h-72 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] rounded-2xl overflow-hidden border-6 border-white dark:border-gray-800 shadow-2xl drop-shadow-xl"
+                className="w-full h-auto aspect-square rounded-2xl overflow-hidden border-6 border-white dark:border-gray-800 shadow-2xl drop-shadow-xl"
               >
                 <img
-                  src="/images/profile.png"
+                  src="/image/profile2.png"
                   alt="Adeel Mukhtar — AI/ML Engineer & Consultant"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   loading="lazy"
                 />
               </motion.div>
