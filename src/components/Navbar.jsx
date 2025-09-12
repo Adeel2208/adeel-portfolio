@@ -54,7 +54,7 @@ export default function Navbar() {
           {/* Profile Image */}
           <div className="flex items-center">
             <ResponsiveImage
-              src="/images/profile.png"
+              src="/image/profile.png"
               alt="Adeel Mukhtar"
               containerClassName="w-14 h-14 rounded-full border-2 border-cyan-300/50 hover:border-cyan-400 transition-all duration-300 shadow-md cursor-pointer"
               whileHoverScale={1.05}
