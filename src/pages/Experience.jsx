@@ -1,4 +1,3 @@
-// src/pages/Experience.jsx
 import { experiences, hackathons } from '../data/experience';
 import TimelineItem from '../components/TimelineItem';
 import HackathonImageCarousel from '../components/HackathonImageCarousel';
@@ -6,30 +5,30 @@ import { motion } from 'framer-motion';
 
 export default function Experience() {
   return (
-    <div className="py-24 px-4 lg:px-8 max-w-6xl mx-auto">
+    <div className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-6xl mx-auto">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="text-center mb-20"
+        viewport={{ once: true, margin: "-50px" }}
+        className="text-center mb-12 sm:mb-16"
       >
-        <h1 className="text-4xl md:text-5xl font-bold font-heading text-primary dark:text-white">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-primary dark:text-white">
           Professional Experience
         </h1>
-        <p className="text-xl text-gray-800 dark:text-gray-200 mt-6 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-gray-800 dark:text-gray-200 mt-4 sm:mt-6 max-w-3xl mx-auto leading-relaxed text-justify">
           From biomedical internships to AI research and FinTech innovation — my journey across industries and technologies.
         </p>
       </motion.div>
 
       {/* Main Experience Timeline */}
-      <div className="space-y-16 mb-24">
+      <div className="space-y-12 sm:space-y-14 lg:space-y-16 mb-16 sm:mb-20 lg:mb-24">
         {experiences.map((exp, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: index * 0.1 }}
           >
             <TimelineItem
@@ -44,44 +43,44 @@ export default function Experience() {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="mt-16"
+        viewport={{ once: true, margin: "-50px" }}
+        className="mt-12 sm:mt-16"
       >
-        <h2 className="text-4xl font-bold text-center mb-12 font-heading text-primary dark:text-white">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 font-heading text-primary dark:text-white">
           Hackathons & Competitions
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {hackathons.map((hack, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -8, boxShadow: "0 20px 40px -15px rgba(6, 182, 212, 0.2)" }}
-              className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
+              className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full min-w-0"
             >
               {/* Image Carousel */}
               <HackathonImageCarousel images={hack.images} interval={2500} />
 
-              <div className="flex items-start justify-between mb-4">
-                <h3 className="font-bold text-2xl text-primary dark:text-white leading-tight">
+              <div className="flex items-start justify-between mb-3 sm:mb-4">
+                <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-primary dark:text-white leading-tight break-words">
                   {hack.name}
                 </h3>
                 {hack.award && (
-                  <span className="bg-gradient-to-r from-amber-400 to-amber-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-md">
+                  <span className="bg-gradient-to-r from-amber-400 to-amber-500 text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-md shrink-0">
                     🏆 {hack.award}
                   </span>
                 )}
               </div>
-              <p className="text-lg text-secondary dark:text-gray-300 mb-4">
+              <p className="text-sm sm:text-base text-secondary dark:text-gray-300 mb-3 sm:mb-4 break-words">
                 {hack.org}
               </p>
-              <p className="text-gray-800 dark:text-gray-200 mb-5 leading-relaxed flex-grow">
+              <p className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-200 mb-4 sm:mb-5 leading-relaxed text-justify break-words flex-grow">
                 {hack.description}
               </p>
-              <div className="pt-4 mt-auto border-t border-gray-100 dark:border-gray-800">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="pt-3 sm:pt-4 mt-auto border-t border-gray-100 dark:border-gray-800">
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 break-words">
                   <span className="font-medium">Team:</span> {hack.team}
                 </p>
               </div>
