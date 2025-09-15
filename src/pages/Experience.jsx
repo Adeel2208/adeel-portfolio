@@ -17,19 +17,19 @@ export default function Experience() {
           Professional Experience
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-gray-800 dark:text-gray-200 mt-4 sm:mt-6 max-w-3xl mx-auto leading-relaxed text-justify">
-          From biomedical internships to AI research and FinTech innovation — my journey across industries and technologies.
+          From biomedical internships to AI research, Medical AI & FinTech innovation — my journey across industries and technologies.
         </p>
       </motion.div>
 
       {/* Main Experience Timeline */}
-      <div className="space-y-12 sm:space-y-14 lg:space-y-16 mb-16 sm:mb-20 lg:mb-24">
+      <div className="space-y-12 sm:space-y-18 lg:space-y-22 mb-18 sm:mb-20 lg:mb-26">
         {experiences.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.1 }}
+            transition={{ delay: index * 0.08 }}
           >
             <TimelineItem
               experience={exp}

@@ -49,7 +49,7 @@ export const projects = [
     id: "crowd-detection",
     title: "Real-Time Violent Crowd Detection",
     subtitle: "For Punjab Safe City Authority",
-    type: "Client Project",
+    type: "Internship",
     tags: ["Computer Vision", "YOLO", "Real-Time", "Surveillance"],
     description: "AI-powered surveillance system detecting violent behavior in real-time CCTV feeds.",
     tech: ["OpenCV", "YOLO", "Python"],

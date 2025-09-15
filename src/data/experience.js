@@ -2,11 +2,11 @@
 
 export const experiences = [
   {
-    title: "AI Engineer",
+    title: "Junior AI Engineer",
     company: "Catalyst4AI",
     period: " Sep 2025 – Present",
-    location: "Remote",
-    description: "Leading research on autoformalization pipeline for interactive theorem proving using LEAN4, advancing automated mathematical reasoning capabilities. Developed novel approaches to bridge natural language mathematical statements with formal proofs, improving formalization accuracy by 25%.",
+    location: "Onsite",
+    description: "My work involves bridging the gap between medical science and artificial intelligence. I'm building AI-driven products for the UAE market, with a strong focus on ensuring full compliance and regulatory readinessBridging the gap between medical science and artificial intelligence through the development of fully compliant, AI-driven solutions.",
     tech: ["Langgraph", "RAG", "LLMs", "Python", "Formal Methods", "Compliance", "FastAPI", "NodeJs"]
   },
   {
