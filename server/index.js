@@ -3,22 +3,26 @@ const dotenv = require('dotenv');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const cors = require('cors');
 
-// Load environment variables from server/.env
+// Load environment variables from server/.env (for local development)
 dotenv.config({ path: './.env' });
 
 const app = express();
-app.use(cors({ origin: ['http://localhost:5173', 'https://your-project.vercel.app'] })); // Restrict to your frontend
+app.use(cors({ origin: ['http://localhost:5173', 'https://your-project.vercel.app'] })); // Replace with your Vercel domain
 app.use(express.json());
 
-// Initialize Gemini AI with API key from server/.env
+// Initialize Gemini AI with API key from environment variables
 const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) {
-  console.error('Error: GEMINI_API_KEY not found in server/.env');
-  process.exit(1);
+  console.error('Error: GEMINI_API_KEY not found. Ensure it is set in server/.env (local) or Vercel environment variables (production).');
 }
-const genAI = new GoogleGenerativeAI(apiKey);
+
+const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
 app.post('/api/chat', async (req, res) => {
+  if (!genAI) {
+    return res.status(500).json({ error: 'Server configuration error: Missing GEMINI_API_KEY' });
+  }
+
   try {
     const { message, knowledgeBase, conversationHistory } = req.body;
 
