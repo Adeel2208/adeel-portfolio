@@ -7,7 +7,7 @@ const cors = require('cors');
 dotenv.config({ path: './.env' });
 
 const app = express();
-app.use(cors({ origin: ['http://localhost:5173', 'https://your-project.vercel.app'] })); // Replace with your Vercel domain
+app.use(cors({ origin: ['http://localhost:5173', 'https://your-project.vercel.app'] }));
 app.use(express.json());
 
 // Initialize Gemini AI with API key from environment variables
@@ -25,7 +25,6 @@ app.post('/api/chat', async (req, res) => {
 
   try {
     const { message, knowledgeBase, conversationHistory } = req.body;
-
     const model = genAI.getGenerativeModel({
       model: 'gemini-2.0-flash-exp',
       generationConfig: {
@@ -49,7 +48,6 @@ Respond as Adeel based only on the information above:`;
 
     const result = await model.generateContent(context);
     const response = result.response.text();
-
     res.json({ response });
   } catch (error) {
     console.error('Gemini API Error:', error);
