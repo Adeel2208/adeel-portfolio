@@ -1,6 +1,4 @@
-// src/components/Chatbot.jsx
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export default function Chatbot({ onClose }) {
   const [messages, setMessages] = useState([]);
@@ -9,19 +7,13 @@ export default function Chatbot({ onClose }) {
   const [error, setError] = useState(null);
   const [isInitialized, setIsInitialized] = useState(false);
   const [knowledgeBase, setKnowledgeBase] = useState('');
+  const [conversationHistory, setConversationHistory] = useState([]);
   const messagesEndRef = useRef(null);
-  const genAI = useRef(null);
 
-  // Initialize Gemini AI and load info.txt
+  // Initialize chatbot and load info.txt
   useEffect(() => {
     const initializeChatbot = async () => {
       try {
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        if (!apiKey) {
-          throw new Error('Gemini API key not found.');
-        }
-
-        genAI.current = new GoogleGenerativeAI(apiKey);
         await loadKnowledgeBase();
         
         setMessages([
@@ -43,12 +35,17 @@ export default function Chatbot({ onClose }) {
   }, []);
 
   const loadKnowledgeBase = async () => {
-    const response = await fetch('/info.txt');
-    if (!response.ok) {
-      throw new Error('info.txt not found in root directory');
+    try {
+      const response = await fetch('/info.txt');
+      if (!response.ok) {
+        throw new Error('info.txt not found in root directory');
+      }
+      const knowledge = await response.text();
+      setKnowledgeBase(knowledge.trim());
+    } catch (error) {
+      console.error('Error loading knowledge base:', error);
+      throw error;
     }
-    const knowledge = await response.text();
-    setKnowledgeBase(knowledge.trim());
   };
 
   const scrollToBottom = () => {
@@ -61,27 +58,29 @@ export default function Chatbot({ onClose }) {
 
   const generateResponse = async (userMessage) => {
     try {
-      const model = genAI.current.getGenerativeModel({ 
-        model: 'gemini-2.0-flash-exp',
-        generationConfig: {
-          temperature: 0.7,
-          topP: 0.8,
-          maxOutputTokens: 1000,
-        },
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: userMessage,
+          knowledgeBase,
+          conversationHistory: conversationHistory.slice(-10), // Limit to last 10 messages for context
+        }),
       });
 
-      const context = `You are Adeel Mukhtar. Respond as yourself based ONLY on the information provided below. Be friendly and conversational.
+      const data = await response.json();
 
-MY INFORMATION:
-${knowledgeBase}
+      if (!response.ok) {
+        throw new Error(data.error || 'Error from server');
+      }
 
-VISITOR'S MESSAGE: ${userMessage}
+      if (!data.response) {
+        throw new Error('Empty response from server');
+      }
 
-Respond as Adeel based only on the information above:`;
-
-      const result = await model.generateContent(context);
-      return result.response.text();
+      return data.response;
     } catch (error) {
+      console.error('Server Error:', error);
       throw new Error('Sorry, I encountered an error. Please try again.');
     }
   };
@@ -92,13 +91,16 @@ Respond as Adeel based only on the information above:`;
 
     const userMessage = { role: 'user', content: input.trim() };
     setMessages(prev => [...prev, userMessage]);
+    setConversationHistory(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
     setError(null);
 
     try {
       const aiResponse = await generateResponse(input.trim());
-      setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }]);
+      const assistantMessage = { role: 'assistant', content: aiResponse };
+      setMessages(prev => [...prev, assistantMessage]);
+      setConversationHistory(prev => [...prev, assistantMessage]);
     } catch (err) {
       setMessages(prev => [...prev, { 
         role: 'assistant', 

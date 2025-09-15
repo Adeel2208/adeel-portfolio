@@ -1,48 +1,57 @@
-import express from 'express';
-import cors from 'cors';
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
+const express = require('express');
+const dotenv = require('dotenv');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const cors = require('cors');
 
-dotenv.config();
+// Load environment variables from server/.env
+dotenv.config({ path: './.env' });
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.use(cors());
+app.use(cors({ origin: ['http://localhost:5173', 'https://your-project.vercel.app'] })); // Restrict to your frontend
 app.use(express.json());
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+// Initialize Gemini AI with API key from server/.env
+const apiKey = process.env.GEMINI_API_KEY;
+if (!apiKey) {
+  console.error('Error: GEMINI_API_KEY not found in server/.env');
+  process.exit(1);
+}
+const genAI = new GoogleGenerativeAI(apiKey);
 
-app.post('/api/contact', async (req, res) => {
-  const { name, email, subject, message } = req.body;
-
-  const mailOptions = {
-    from: email,
-    to: 'adeelmukhtar051@gmail.com',
-    subject: `Portfolio Contact: ${subject}`,
-    text: `
-      Name: ${name}
-      Email: ${email}
-      Subject: ${subject}
-      Message: ${message}
-    `
-  };
-
+app.post('/api/chat', async (req, res) => {
   try {
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ success: true, message: 'Email sent successfully!' });
+    const { message, knowledgeBase, conversationHistory } = req.body;
+
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-2.0-flash-exp',
+      generationConfig: {
+        temperature: 0.7,
+        topP: 0.8,
+        maxOutputTokens: 1000,
+      },
+    });
+
+    const context = `You are Adeel Mukhtar. Respond as yourself based ONLY on the information provided below. Be friendly and conversational.
+
+MY INFORMATION:
+${knowledgeBase}
+
+CONVERSATION CONTEXT:
+${conversationHistory.map(msg => `${msg.role.toUpperCase()}: ${msg.content}`).join('\n')}
+
+VISITOR'S MESSAGE: ${message}
+
+Respond as Adeel based only on the information above:`;
+
+    const result = await model.generateContent(context);
+    const response = result.response.text();
+
+    res.json({ response });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Failed to send email.' });
+    console.error('Gemini API Error:', error);
+    res.status(500).json({ error: error.message || 'Error generating response' });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
