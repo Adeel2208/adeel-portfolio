@@ -1,13 +1,13 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const cors = require('cors');
+import express from 'express';
+import dotenv from 'dotenv';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import cors from 'cors';
 
 // Load environment variables from server/.env (for local development)
 dotenv.config({ path: './.env' });
 
 const app = express();
-app.use(cors({ origin: ['http://localhost:5173', 'https://your-project.vercel.app'] }));
+app.use(cors({ origin: ['http://localhost:5173', 'https://adeel-portfolio.vercel.app'] }));
 app.use(express.json());
 
 // Initialize Gemini AI with API key from environment variables
