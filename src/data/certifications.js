@@ -23,6 +23,31 @@ export const certifications = [
     skills: ["LLMs", "Fine-tuning", "RAG", "RLHF", "Prompt Engineering", "Ollama", "Hugging Face"],
     images: ["/image/certs/nust.jpg", "/image/certs/nust.jpg"]
   },
+
+  {
+    id: "Agile Development and Scrum",
+    title: "Introduction to Agile Development and Scrum",
+    issuer: "IBM",
+    date: "Oct 2025",
+    credentialId: "KKJ87WL64YJ4",
+    credentialUrl: "https://www.coursera.org/account/accomplishments/records/KKJ87WL64YJ4",
+    description: "Introduction to Agile Development and Scrum: Agile, Scrum, Product Backlog, Sprint, Daily Stand-up, Sprint Review, Retrospective, Product Owner, Scrum Master, User Stories.",
+    skills: ["Agile", "Scrum"],
+    images: ["/image/certs/scrum.png"]
+  },
+
+  {
+    id: "Azure",
+    title: "Essentials with Azure Fundamentals",
+    issuer: "Microsoft",
+    date: "Oct 2025",
+    credentialId: "29REZ61MFILR",
+    credentialUrl: "https://www.coursera.org/account/accomplishments/records/29REZ61MFILR",
+    description: "Azure AI Fundamentals (AI-900): AI, Machine Learning, Computer Vision, NLP, Conversational AI, Generative AI, Responsible AI, Azure Services.",
+    skills: ["Azure", "Cloud basics","Azure AI foundary", "Azure services"],
+    images: ["/image/certs/azure.png"]
+  },
+
   {
     id: "prompt-engineering",
     title: "Prompt Engineering Specialization",

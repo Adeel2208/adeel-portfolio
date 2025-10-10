@@ -148,9 +148,6 @@ export default function Contact() {
           transition={{ delay: 0.25 }}
           className="text-center mt-28 pt-12 border-t border-gray-200 dark:border-gray-700"
         >
-          <h3 className="text-2xl sm:text-3xl font-bold font-heading text-primary dark:text-white mb-5">
-            Ready to start your AI journey?
-          </h3>
           <p className="text-base text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed text-justify">
             I respond to all messages within 24 hours. Let’s discuss how AI can transform your business, research, or product.
           </p>
