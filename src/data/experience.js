@@ -2,7 +2,7 @@
 
 export const experiences = [
   {
-    title: "Junior AI Engineer",
+    title: "AI Engineer",
     company: "Catalyst4AI",
     period: " Sep 2025 – Present",
     location: "Onsite",

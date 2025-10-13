@@ -48,6 +48,34 @@ export const certifications = [
     images: ["/image/certs/azure.png"]
   },
 
+
+  {
+    id: "Data Privacy",
+    title: "Data Privacy and Protection Standards",
+    issuer: "Coursera instructions network",
+    date: "Oct 2025",
+    credentialId: "MCKSORZVUJL9",
+    credentialUrl: "https://www.coursera.org/account/accomplishments/records/MCKSORZVUJL9",
+    description: "Data Protection Strategies for Security and Breach Prevention, Global Data Privacy Regulations and Their Impact on Businesses, Data Privacy Compliance through Assessments and Policies",
+    skills: ["GDPR", "Data security","Compliance"],
+    images: ["/image/certs/data.png"]
+  },
+
+
+  {
+    id: "Healthcare Data security",
+    title: "Healthcare Data Security, Privacy, and Compliance",
+    issuer: "Johns Hopkins University",
+    date: "Oct 2025",
+    credentialId: "UUVSS79HTHEQ",
+    credentialUrl: "https://www.coursera.org/account/accomplishments/records/UUVSS79HTHEQ",
+    description: "Completed a comprehensive four-module course focused on the complexities of Protected Health Information (PHI), mastering the principles of HIPAA compliance, data security, and privacy best practices within a healthcare IT context.",
+    skills: ["Healthcare Data", "Data security","Compliance","Data privacy"],
+    images: ["/image/certs/compliance.png"]
+  },
+
+
+
   {
     id: "prompt-engineering",
     title: "Prompt Engineering Specialization",
