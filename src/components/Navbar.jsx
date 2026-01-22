@@ -1,8 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import ResponsiveImage from './ResponsiveImage';
-import Chatbot from './Chatbot'; // Import the Chatbot component
 
 export default function Navbar() {
   const location = useLocation();
@@ -16,39 +14,50 @@ export default function Navbar() {
     document.body.removeChild(link);
   };
 
-  const [isChatOpen, setIsChatOpen] = useState(false); // State to toggle chat
-
   return (
     <>
       <motion.nav
         initial={{ y: -150 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-primary/80 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 lg:px-8 shadow-sm"
+        transition={{ duration: 0.8, ease: [0.25, 0.25, 0, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 bg-white/98 backdrop-blur-xl border-b border-primary-100/50 px-4 sm:px-6 lg:px-8 shadow-lg shadow-primary-500/5"
       >
         <div className="container mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-2.5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-4 sm:py-3">
             {/* Logo and Profile Image */}
-            <div className="flex items-center justify-between w-full sm:w-auto">
+            <motion.div 
+              className="flex items-center justify-between w-full sm:w-auto"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
               <Link
                 to="/"
-                className="text-base sm:text-lg lg:text-xl font-heading font-bold text-slate-900 hover:text-accent transition-colors"
+                className="text-lg sm:text-xl lg:text-2xl font-heading font-bold bg-gradient-to-r from-primary-700 to-accent-600 bg-clip-text text-transparent hover:from-primary-800 hover:to-accent-700 transition-all duration-300"
               >
                 Adeel Mukhtar
               </Link>
-              <div className="ml-4"> {/* Shifts the image right */}
+              <motion.div 
+                className="ml-4 sm:hidden"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
                 <ResponsiveImage
                   src="/image/profile.png"
                   alt="Adeel Mukhtar"
-                  containerClassName="w-9 h-9 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-full border-2 border-cyan-300/50 hover:border-accent transition-all duration-300 shadow-md cursor-pointer"
+                  containerClassName="w-10 h-10 rounded-full border-2 border-gradient-to-r from-primary-400 to-accent-400 shadow-md hover:shadow-lg cursor-pointer transition-all duration-300"
                   whileHoverScale={1.08}
-                  style={{ marginRight: '16px' }} // Fallback inline style
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            {/* Navigation Links, Chat Button, and Resume Button */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3 mt-2 sm:mt-0 text-[0.65rem] sm:text-xs lg:text-sm">
+            {/* Navigation Links and Resume Button */}
+            <motion.div 
+              className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-3 sm:mt-0 text-[0.65rem] sm:text-xs lg:text-sm"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
               <NavLink to="/">Home</NavLink>
               <NavLink to="/about">About</NavLink>
               <NavLink to="/projects">Projects</NavLink>
@@ -59,20 +68,8 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => setIsChatOpen(!isChatOpen)}
-                className="bg-accent hover:bg-cyan-600 text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg font-medium text-[0.65rem] sm:text-xs shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1"
-              >
-                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
-                <span className="hidden sm:inline">Chat</span>
-                <span className="sm:hidden">AI</span>
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={handleDownloadResume}
-                className="bg-accent hover:bg-cyan-600 text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg font-medium text-[0.65rem] sm:text-xs shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1"
+                className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-medium text-[0.65rem] sm:text-xs shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-1.5 border border-primary-500/20"
               >
                 <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -80,16 +77,13 @@ export default function Navbar() {
                 <span className="hidden sm:inline">Download Resume</span>
                 <span className="sm:hidden">Resume</span>
               </motion.button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </motion.nav>
 
-      {/* Chatbot Toggle */}
-      {isChatOpen && <Chatbot onClose={() => setIsChatOpen(false)} />}
-
-      {/* Spacer to prevent content overlap on mobile */}
-      <div className="h-24 sm:h-16 lg:h-14"></div>
+      {/* Spacer to prevent content overlap */}
+      <div className="h-20 sm:h-16 lg:h-14"></div>
     </>
   );
 }
@@ -101,16 +95,13 @@ function NavLink({ to, children }) {
   return (
     <Link
       to={to}
-      className={`text-[0.65rem] sm:text-xs lg:text-sm font-medium text-slate-700 hover:text-accent transition-colors relative group px-1.5 py-1.5 sm:px-2 sm:py-2 rounded-md ${
-        isActive ? 'text-accent font-semibold' : ''
+      className={`text-[0.65rem] sm:text-xs lg:text-sm font-medium transition-all duration-300 relative px-2 py-2 sm:px-3 sm:py-2 rounded-lg ${
+        isActive 
+          ? 'text-white bg-gradient-to-r from-primary-600 to-accent-600 shadow-md' 
+          : 'text-secondary-700 hover:text-white hover:bg-gradient-to-r hover:from-primary-500 hover:to-accent-500'
       }`}
     >
       {children}
-      <span
-        className={`absolute -bottom-0.5 left-1/2 w-0 h-0.5 bg-accent group-hover:w-2 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all duration-300 ${
-          isActive ? 'w-2 -translate-x-1/2' : ''
-        }`}
-      ></span>
     </Link>
   );
 }

@@ -16,47 +16,57 @@ export default function ProjectCard({ project }) {
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <div className="mb-3">
-          <span className="inline-block bg-accent/10 text-accent text-xs px-3 py-1 rounded-full border border-accent/20 font-medium">
+          <span className="inline-block bg-accent/10 text-accent-700 text-xs px-3 py-1 rounded-full border border-accent/20 font-medium">
             {project.type}
           </span>
         </div>
 
-        <h3 className="text-xl font-bold text-primary dark:text-white mb-2">{project.title}</h3>
-        <p className="text-secondary dark:text-gray-300 text-sm mb-4">{project.subtitle}</p>
+        <h3 className="text-xl font-bold text-secondary-900 dark:text-white mb-2">{project.title}</h3>
+        <p className="text-secondary-700 dark:text-gray-300 text-sm mb-4">{project.subtitle}</p>
 
         <div className="mb-4 flex flex-wrap gap-2">
           {project.tags.slice(0, 3).map((tag, i) => (
             <span
               key={i}
-              className="bg-gray-100 dark:bg-gray-700 text-xs px-2.5 py-1 rounded-full text-gray-800 dark:text-gray-200"
+              className="bg-gray-100 dark:bg-gray-700 text-xs px-2.5 py-1 rounded-full text-secondary-800 dark:text-gray-200"
             >
               {tag}
             </span>
           ))}
           {project.tags.length > 3 && (
-            <span className="bg-gray-100 dark:bg-gray-700 text-xs px-2.5 py-1 rounded-full text-gray-500 dark:text-gray-400">
+            <span className="bg-gray-100 dark:bg-gray-700 text-xs px-2.5 py-1 rounded-full text-secondary-600 dark:text-gray-400">
               +{project.tags.length - 3}
             </span>
           )}
         </div>
 
-        <p className="text-gray-700 dark:text-gray-300 text-sm mb-5 flex-grow">{project.description}</p>
+        <p className="text-secondary-700 dark:text-gray-300 text-sm mb-5 flex-grow">{project.description}</p>
 
         <div className="flex flex-wrap gap-3">
           {project.github && (
             <a
               href={project.github}
-              className="text-accent hover:underline text-sm font-medium"
+              className="text-accent-700 hover:text-accent-800 hover:underline text-sm font-medium"
               target="_blank"
               rel="noreferrer"
             >
               Code →
             </a>
           )}
+          {project.website && (
+            <a
+              href={project.website}
+              className="text-accent-700 hover:text-accent-800 hover:underline text-sm font-medium"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Live Site →
+            </a>
+          )}
           {project.paper && (
             <a
               href={project.paper}
-              className="text-accent hover:underline text-sm font-medium"
+              className="text-accent-700 hover:text-accent-800 hover:underline text-sm font-medium"
               target="_blank"
               rel="noreferrer"
             >
