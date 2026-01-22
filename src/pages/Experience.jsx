@@ -8,9 +8,10 @@ export default function Experience() {
     <div className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-6xl mx-auto">
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
         className="text-center mb-12 sm:mb-16"
       >
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-primary dark:text-white">
@@ -26,14 +27,15 @@ export default function Experience() {
         {experiences.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.08 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
           >
             <TimelineItem
               experience={exp}
               isLast={index === experiences.length - 1}
+              index={index}
             />
           </motion.div>
         ))}
@@ -41,9 +43,10 @@ export default function Experience() {
 
       {/* Hackathons Section */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
         className="mt-12 sm:mt-16"
       >
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 font-heading text-primary dark:text-white">
@@ -53,15 +56,15 @@ export default function Experience() {
           {hackathons.map((hack, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8, boxShadow: "0 20px 40px -15px rgba(6, 182, 212, 0.2)" }}
-              className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full min-w-0"
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="bg-white/70 dark:bg-gray-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full min-w-0"
             >
               {/* Image Carousel */}
-              <HackathonImageCarousel images={hack.images} interval={2500} />
+              <HackathonImageCarousel images={hack.images} interval={3000} />
 
               <div className="flex items-start justify-between mb-3 sm:mb-4">
                 <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-primary dark:text-white leading-tight break-words">

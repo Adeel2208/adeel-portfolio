@@ -52,75 +52,71 @@ export default function TimelineItem({ experience, isLast, index = 0 }) {
       {!isLast && (
         <div className="absolute left-6 sm:left-7 md:left-8 top-12 sm:top-14 w-0.5 h-[calc(100%-3rem)] sm:h-[calc(100%-3.5rem)]">
           <div className="w-full h-full bg-gradient-to-b from-primary-300 via-accent-300 to-primary-300 opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-primary-400 to-accent-400 opacity-0 group-hover:opacity-60 transition-opacity duration-500 blur-sm"></div>
+          {/* Reduced blur complexity */}
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-primary-400 to-accent-400 opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
         </div>
       )}
 
       {/* Enhanced Timeline Dot with Animation */}
       <motion.div 
         className="z-20 flex items-center justify-center relative"
-        initial={{ scale: 0, rotate: -180 }}
-        whileInView={{ scale: 1, rotate: 0 }}
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
         transition={{ 
           delay: index * 0.1, 
-          duration: 0.6,
+          duration: 0.5,
           type: "spring",
           stiffness: 200,
-          damping: 15
+          damping: 20
         }}
         viewport={{ once: true }}
       >
-        {/* Outer Ring with Pulse Animation */}
-        <div className="absolute inset-0 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-primary-200 to-accent-200 opacity-30 animate-ping"></div>
+        {/* Outer Ring - Replaced expensive animate-ping with subtle static or simple pulse if needed. Removed for performance. */}
+        <div className="absolute inset-0 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-primary-200 to-accent-200 opacity-20"></div>
         
         {/* Middle Ring */}
-        <div className="absolute inset-1 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-primary-100 to-accent-100 opacity-50"></div>
+        <div className="absolute inset-1 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-primary-100 to-accent-100 opacity-40"></div>
         
         {/* Main Dot with Icon */}
-        <motion.div 
-          className={`relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r ${getGradientColors(experience.type)} rounded-full shadow-lg flex items-center justify-center group-hover:shadow-xl transition-all duration-300`}
-          whileHover={{ scale: 1.2, rotate: 360 }}
-          transition={{ duration: 0.3 }}
+        <div 
+          className={`relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r ${getGradientColors(experience.type)} rounded-full shadow-lg flex items-center justify-center group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}
         >
           {getExperienceIcon(experience.type)}
           
-          {/* Glow Effect */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-accent-400 opacity-0 group-hover:opacity-30 blur-md transition-opacity duration-300"></div>
-        </motion.div>
+          {/* Glow Effect - Reduced blur */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-accent-400 opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+        </div>
       </motion.div>
 
       {/* Enhanced Experience Card */}
       <motion.div
-        initial={{ opacity: 0, x: 50, y: 20 }}
+        initial={{ opacity: 0, x: 20, y: 10 }}
         whileInView={{ opacity: 1, x: 0, y: 0 }}
         transition={{ 
-          delay: index * 0.1 + 0.2, 
-          duration: 0.8,
-          ease: [0.25, 0.25, 0, 1]
+          delay: index * 0.1, 
+          duration: 0.5,
+          ease: "easeOut"
         }}
-        viewport={{ once: true }}
-        whileHover={{ y: -8, scale: 1.02 }}
-        className="ml-16 sm:ml-20 md:ml-24 p-6 sm:p-8 lg:p-10 bg-white/90 backdrop-blur-xl rounded-3xl border border-primary-100/50 w-full transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10 hover:border-primary-200/80 group-hover:bg-white/95"
+        viewport={{ once: true, margin: "-10%" }}
+        whileHover={{ y: -4 }}
+        className="ml-16 sm:ml-20 md:ml-24 p-6 sm:p-8 lg:p-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-3xl border border-primary-100/50 w-full transition-all duration-300 hover:shadow-xl hover:shadow-primary-500/5 hover:border-primary-200/80 group-hover:bg-white/90 dark:group-hover:bg-gray-900/90"
       >
         {/* Header Section with Enhanced Typography */}
         <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4 sm:mb-6">
           <div className="flex-1">
-            <motion.h3 
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-heading bg-gradient-to-r from-secondary-900 to-primary-700 bg-clip-text text-transparent mb-2 sm:mb-3 leading-tight"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.2 }}
+            <h3 
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-heading bg-gradient-to-r from-secondary-900 to-primary-700 bg-clip-text text-transparent mb-2 sm:mb-3 leading-tight transition-transform duration-200 hover:scale-[1.01]"
             >
               {experience.title}
-            </motion.h3>
+            </h3>
             <p className="text-sm sm:text-base md:text-lg text-primary-700 font-semibold mb-1">
               {experience.company}
             </p>
           </div>
           
           {/* Enhanced Period Badge */}
-          <motion.div 
-            className="mt-3 md:mt-0 md:ml-4"
-            whileHover={{ scale: 1.05 }}
+          <div 
+            className="mt-3 md:mt-0 md:ml-4 transition-transform duration-200 hover:scale-105"
           >
             <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-50 to-accent-50 text-primary-700 text-sm font-medium rounded-full border border-primary-200/50 shadow-sm">
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,13 +124,12 @@ export default function TimelineItem({ experience, isLast, index = 0 }) {
               </svg>
               {experience.period}
             </span>
-          </motion.div>
+          </div>
         </div>
 
         {/* Enhanced Location Badge */}
-        <motion.div 
-          className="mb-5 sm:mb-6"
-          whileHover={{ scale: 1.02 }}
+        <div 
+          className="mb-5 sm:mb-6 transition-transform duration-200 hover:scale-102"
         >
           <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-emerald-50 to-indigo-50 text-emerald-700 text-sm font-medium rounded-full border border-emerald-200/50 shadow-sm">
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,27 +138,17 @@ export default function TimelineItem({ experience, isLast, index = 0 }) {
             </svg>
             {experience.location}
           </span>
-        </motion.div>
+        </div>
 
         {/* Enhanced Description */}
-        <motion.p 
-          className="text-sm sm:text-base md:text-lg text-secondary-700 leading-relaxed text-justify mb-6 sm:mb-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: index * 0.1 + 0.4, duration: 0.6 }}
-          viewport={{ once: true }}
-        >
+        <p className="text-sm sm:text-base md:text-lg text-secondary-700 dark:text-gray-300 leading-relaxed text-justify mb-6 sm:mb-8">
           {experience.description}
-        </motion.p>
+        </p>
 
         {/* Enhanced Technologies Section */}
         {experience.tech && (
-          <motion.div 
+          <div 
             className="pt-4 sm:pt-6 border-t border-gradient-to-r from-primary-100 to-accent-100"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 + 0.6, duration: 0.6 }}
-            viewport={{ once: true }}
           >
             <div className="flex items-center mb-3 sm:mb-4">
               <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,25 +160,15 @@ export default function TimelineItem({ experience, isLast, index = 0 }) {
             </div>
             <div className="flex flex-wrap gap-2 sm:gap-3">
               {experience.tech.map((tech, idx) => (
-                <motion.span
+                <span
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ 
-                    delay: index * 0.1 + 0.8 + (idx * 0.05), 
-                    duration: 0.4,
-                    type: "spring",
-                    stiffness: 200
-                  }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="bg-gradient-to-r from-white to-primary-50 text-primary-700 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-2.5 rounded-full border border-primary-200/50 font-medium shadow-sm hover:shadow-md hover:border-primary-300/70 transition-all duration-300 cursor-default"
+                  className="bg-gradient-to-r from-white to-primary-50 text-primary-700 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-2.5 rounded-full border border-primary-200/50 font-medium shadow-sm hover:shadow-md hover:border-primary-300/70 transition-all duration-300 cursor-default hover:scale-105 hover:-translate-y-0.5"
                 >
                   {tech}
-                </motion.span>
+                </span>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
 
         {/* Decorative Corner Element */}
